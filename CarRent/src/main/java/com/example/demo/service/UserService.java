@@ -34,9 +34,10 @@ public UserDto createUser(UserDto userDto) {
 public UserDto updateUser (UserDto userDto) {
 	User userp = userRepo.findById(userDto.getId()).orElse(null);
 	String p=userp.getPassword();
+	List<Role> roles= userp.getRoles();
 	
 	User user = userMapper.fromDto(userDto);
-	
+	user.setRoles(roles);
 	user.setPassword(p);
 	userRepo.save(user);
 	
